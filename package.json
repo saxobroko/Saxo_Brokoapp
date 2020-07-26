@@ -11,5 +11,8 @@
     "url": "saxobrokoapp"
   },
   "author": "Saxo_Broko",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "electron-updater": "^4.3.1"
+  }
 }
