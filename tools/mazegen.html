@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html id="wrapper" lang="en">
+<head>
+		<title>Saxo_Broko - MazeGen</title>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1, minimum-scale=1" name="viewport">
+		<link rel="stylesheet" href="../w3.css" type="text/css">
+		<link rel="stylesheet" href="../style.css" />
+		<script src="https://kit.fontawesome.com/1c9144b004.js" crossorigin="anonymous"></script>
+<style>
+body {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}
+#elMaze {
+  display: grid;
+  width: 90vmin;
+  height: 90vmin;
+}
+#elMaze .cell {
+  box-sizing: border-box;
+  border: 1px solid black;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+}
+#elMaze .cell.brk1 {
+  border-top-style: none;
+}
+#elMaze .cell.brk2 {
+  border-right-style: none;
+}
+#elMaze .cell.brk4 {
+  border-bottom-style: none;
+}
+#elMaze .cell.brk8 {
+  border-left-style: none;
+}
+#elMaze .cell.tb {
+  border-top-width: 3px;
+}
+#elMaze .cell.rb {
+  border-right-width: 3px;
+}
+#elMaze .cell.bb {
+  border-bottom-width: 3px;
+}
+#elMaze .cell.lb {
+  border-left-width: 3px;
+}
+#elMaze .cell.brk1:before,
+#elMaze .cell.brk2:before,
+#elMaze .cell.brk4:before,
+#elMaze .cell.brk8:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#elMaze .cell.brk1:before {
+  background: radial-gradient(farthest-corner at top center, hsla(0, 50%, 20%, 0.25) 90%, transparent);
+}
+#elMaze .cell.brk2:before {
+  background: radial-gradient(farthest-corner at right center, hsla(0, 50%, 20%, 0.25) 90%, transparent);
+}
+#elMaze .cell.brk4:before {
+  background: radial-gradient(farthest-corner at bottom center, hsla(0, 50%, 20%, 0.25) 90%, transparent);
+}
+#elMaze .cell.brk8:before {
+  background: radial-gradient(farthest-corner at left center, hsla(0, 50%, 20%, 0.25) 90%, transparent);
+}
+#elMaze .cell.entrance:before {
+  background: radial-gradient(farthest-side at left top, transparent 50%, hsla(0, 50%, 20%, 0.25) 100%);
+}
+#elMaze .cell.exit:before {
+  background: radial-gradient(farthest-side at right bottom, transparent 50%, hsla(0, 50%, 20%, 0.25) 100%);
+}
+#elMaze #elTitle {
+  display: grid;
+  place-content: center;
+  border: 2px solid black;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 1ch;
+}
+</style>
+</head>
+<div id="menu-bar">
+     <div class="left" role="menu">
+       <button class="menubar-btn" id="menu-btn"><i class="fas fa-bars"></i></button>
+       <h5>Saxo_Broko - Maze Generator</h5>
+     </div>
+     <div class="right">
+       <button class="menubar-btn" id="minimize-btn"><i class="fas fa-window-minimize"></i></button>
+       <button class="menubar-btn" id="max-unmax-btn"><i class="far fa-square"></i></button>
+       <button class="menubar-btn" id="close-btn"><i class="fas fa-times"></i></button>
+     </div>
+   </div>
+<div class="w3-center"> 
+
+<div class="" id="main">
+<div id="elMaze">
+    <div id="elTitle"> 
+      <img src="../images/avatar.webp" width="100%" />
+      <button style="width:90%;" id="elRegen" autofocus="autofocus" tabIndex="1">Regenerate</button></div>
+</div>
+	<script>
+	//
+// my maze view 
+//
+const ncol = 20;
+const nrow = 20;
+const area = { x: 6, y: 6, w:8 , h: 8 };
+
+function gen() {
+  const maze = Maze({ nrow, ncol, area });
+  elMaze.style = `
+    display:grid;
+    grid-template-columns:repeat(${ncol}, 1fr);
+    grid-template-rows:repeat(${nrow}, 1fr);
+  `
+  elTitle.style = `
+    grid-row:${area.y + 1}/span ${area.h};
+    grid-column:${area.x + 1}/span ${area.w};
+  `
+  for(const el of Array.from(elMaze.querySelectorAll('.cell'))) {
+    el.remove();
+  }
+  for (const [y, row] of maze.cells.entries()) {
+    for (const [x, cell] of row.entries()) {
+      if (cell.d == -1) continue;
+      const el = document.createElement('div');
+      for (const i of [1, 2, 4, 8])
+        if (cell.d & i) el.classList.add(`brk${i}`);
+      if (x == 0 && y == 0) el.classList.add(`brk8`, `entrance`);
+      if (x == ncol - 1 && y == nrow - 1) el.classList.add(`brk2`, `exit`);
+      if (x == 0) el.classList.add('lb');
+      else if (x == ncol - 1) el.classList.add('rb');
+      if (y == 0) el.classList.add('tb');
+      else if (y == nrow - 1) el.classList.add('bb');
+      //grid-auto-flow will handle these...
+      //el.style.gridRowStart = y + 1;
+      //el.style.gridColumnStart = x + 1;
+      el.classList.add('cell');
+      elMaze.append(el);
+    }
+  }
+}
+
+gen();
+elRegen.onclick = gen;
+
+
+
+//
+// my maze algo
+//
+function Maze({ nrow, ncol, area }) {
+  const cells = [];
+  for (let y = 0; y < nrow; ++y) {
+    cells[y] = [];
+    for (let x = 0; x < ncol; ++x) {
+      const d = x >= area.x && x < area.x + area.w && y >= area.y && y < area.y + area.h ? -1 : 0;
+      cells[y][x] = { x, y, d };
+    }
+  }
+
+  const total = nrow * ncol - area.w * area.h;
+  const walked = new Set();
+
+  function walk(cell) {
+    while (walked.size != total) {
+      walked.add(cell);
+      const neighbors = findNeighbors(cell)
+      if (neighbors.length > 0) {
+        const {d, c} = randomPick(neighbors);
+        cell.d |= d;
+        c.parent = cell;
+        c.d |= (d >= 4 ? d >> 2 : d << 2);
+        cell = c;
+      }
+      else {
+        cell = cell.parent;
+      }
+    }
+  }
+
+  function findNeighbors(cell) {
+    return [
+      { d: 8, c: cells[cell.y] && cells[cell.y][cell.x - 1] },
+      { d: 2, c: cells[cell.y] && cells[cell.y][cell.x + 1] },
+      { d: 1, c: cells[cell.y - 1] && cells[cell.y - 1][cell.x] },
+      { d: 4, c: cells[cell.y + 1] && cells[cell.y + 1][cell.x] }
+    ].filter(x => x.c && x.c != cell.parent && x.c.d === 0);
+    // not OOB ; not cell's parent ; not yet walk;
+  }
+
+  function randomPick(xs) {
+    return xs[Math.random() * xs.length | 0];
+  } 
+
+  walk(cells[0][0]);
+
+  return { cells };
+}
+
+	</script>
+	<script src="../renderer.js"></script>
+</html>

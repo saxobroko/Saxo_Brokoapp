@@ -1,0 +1,1189 @@
+<html>
+<head>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Source+Code+Pro:300);
+body {
+  font-family: 'Source Code Pro', monospace;
+  font-size: 3.2rem;
+  letter-spacing: -.06em;
+}
+
+@keyframes hide {
+  to {
+    visibility: hidden;
+  }
+}
+@keyframes signal {
+  from {
+    background: #e74c3c;
+  }
+  to {
+    background: #2ecc71;
+  }
+}
+@keyframes counter {
+  from {
+    top: 0;
+  }
+  to {
+    top: -1000%;
+  }
+}
+input[type="checkbox"] {
+  display: none;
+}
+
+#intro {
+  z-index: 2;
+}
+
+#intro, #win, #lose {
+  display: table;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  background: #3498db;
+  cursor: pointer;
+}
+
+#intro > div, #win > div, #lose > div {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#intro > label {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  animation: delaysZi 0s linear infinite paused;
+}
+
+@keyframes delaysZi {
+  from {
+    z-index: 0;
+  }
+  to {
+    z-index: 50;
+  }
+}
+#intro > label:nth-child(0) {
+  animation-duration: 129ms;
+  animation-delay: -549ms;
+}
+
+#intro > label:nth-child(1) {
+  animation-duration: 74ms;
+  animation-delay: -880ms;
+}
+
+#intro > label:nth-child(2) {
+  animation-duration: 317ms;
+  animation-delay: -859ms;
+}
+
+#intro > label:nth-child(3) {
+  animation-duration: 115ms;
+  animation-delay: -125ms;
+}
+
+#intro > label:nth-child(4) {
+  animation-duration: 331ms;
+  animation-delay: -192ms;
+}
+
+#intro > label:nth-child(5) {
+  animation-duration: 212ms;
+  animation-delay: -219ms;
+}
+
+#intro > label:nth-child(6) {
+  animation-duration: 359ms;
+  animation-delay: -895ms;
+}
+
+#intro > label:nth-child(7) {
+  animation-duration: 339ms;
+  animation-delay: -199ms;
+}
+
+#intro > label:nth-child(8) {
+  animation-duration: 340ms;
+  animation-delay: -73ms;
+}
+
+#intro > label:nth-child(9) {
+  animation-duration: 89ms;
+  animation-delay: -665ms;
+}
+
+#intro > label:nth-child(10) {
+  animation-duration: 393ms;
+  animation-delay: -144ms;
+}
+
+#intro > label:nth-child(11) {
+  animation-duration: 299ms;
+  animation-delay: -569ms;
+}
+
+#intro > label:nth-child(12) {
+  animation-duration: 437ms;
+  animation-delay: -573ms;
+}
+
+#intro > label:nth-child(13) {
+  animation-duration: 308ms;
+  animation-delay: -518ms;
+}
+
+#intro > label:nth-child(14) {
+  animation-duration: 112ms;
+  animation-delay: -479ms;
+}
+
+#intro > label:nth-child(15) {
+  animation-duration: 369ms;
+  animation-delay: -246ms;
+}
+
+#intro > label:nth-child(16) {
+  animation-duration: 254ms;
+  animation-delay: -670ms;
+}
+
+#intro > label:nth-child(17) {
+  animation-duration: 257ms;
+  animation-delay: -615ms;
+}
+
+#intro > label:nth-child(18) {
+  animation-duration: 313ms;
+  animation-delay: -570ms;
+}
+
+#intro > label:nth-child(19) {
+  animation-duration: 433ms;
+  animation-delay: -461ms;
+}
+
+#intro > label:nth-child(20) {
+  animation-duration: 124ms;
+  animation-delay: -628ms;
+}
+
+#intro > label:nth-child(21) {
+  animation-duration: 233ms;
+  animation-delay: -152ms;
+}
+
+#intro > label:nth-child(22) {
+  animation-duration: 285ms;
+  animation-delay: -118ms;
+}
+
+#intro > label:nth-child(23) {
+  animation-duration: 71ms;
+  animation-delay: -902ms;
+}
+
+#intro > label:nth-child(24) {
+  animation-duration: 225ms;
+  animation-delay: -332ms;
+}
+
+#intro > label:nth-child(25) {
+  animation-duration: 70ms;
+  animation-delay: -488ms;
+}
+
+#intro > label:nth-child(26) {
+  animation-duration: 352ms;
+  animation-delay: -899ms;
+}
+
+#intro > label:nth-child(27) {
+  animation-duration: 296ms;
+  animation-delay: -127ms;
+}
+
+#intro > label:nth-child(28) {
+  animation-duration: 252ms;
+  animation-delay: -649ms;
+}
+
+#intro > label:nth-child(29) {
+  animation-duration: 288ms;
+  animation-delay: -7ms;
+}
+
+#intro > label:nth-child(30) {
+  animation-duration: 320ms;
+  animation-delay: -262ms;
+}
+
+#intro > label:nth-child(31) {
+  animation-duration: 89ms;
+  animation-delay: -157ms;
+}
+
+#intro > label:nth-child(32) {
+  animation-duration: 321ms;
+  animation-delay: -409ms;
+}
+
+#intro > label:nth-child(33) {
+  animation-duration: 219ms;
+  animation-delay: -784ms;
+}
+
+#intro > label:nth-child(34) {
+  animation-duration: 236ms;
+  animation-delay: -209ms;
+}
+
+#intro > label:nth-child(35) {
+  animation-duration: 72ms;
+  animation-delay: -675ms;
+}
+
+#intro > label:nth-child(36) {
+  animation-duration: 252ms;
+  animation-delay: -846ms;
+}
+
+#intro > label:nth-child(37) {
+  animation-duration: 238ms;
+  animation-delay: -457ms;
+}
+
+#intro > label:nth-child(38) {
+  animation-duration: 416ms;
+  animation-delay: -741ms;
+}
+
+#intro > label:nth-child(39) {
+  animation-duration: 150ms;
+  animation-delay: -997ms;
+}
+
+#intro > label:nth-child(40) {
+  animation-duration: 333ms;
+  animation-delay: -671ms;
+}
+
+#intro > label:nth-child(41) {
+  animation-duration: 443ms;
+  animation-delay: -803ms;
+}
+
+#intro > label:nth-child(42) {
+  animation-duration: 282ms;
+  animation-delay: -177ms;
+}
+
+#intro > label:nth-child(43) {
+  animation-duration: 206ms;
+  animation-delay: -681ms;
+}
+
+#intro > label:nth-child(44) {
+  animation-duration: 192ms;
+  animation-delay: -785ms;
+}
+
+#intro > label:nth-child(45) {
+  animation-duration: 412ms;
+  animation-delay: -913ms;
+}
+
+#intro > label:nth-child(46) {
+  animation-duration: 180ms;
+  animation-delay: -650ms;
+}
+
+#intro > label:nth-child(47) {
+  animation-duration: 391ms;
+  animation-delay: -746ms;
+}
+
+#intro > label:nth-child(48) {
+  animation-duration: 378ms;
+  animation-delay: -290ms;
+}
+
+#intro > label:nth-child(49) {
+  animation-duration: 325ms;
+  animation-delay: -491ms;
+}
+
+.start:checked ~ #intro > label {
+  animation-play-state: running;
+}
+
+.start:checked ~ #intro {
+  z-index: -999;
+  opacity: 0;
+}
+
+.start:checked ~ #signal {
+  animation: signal 3s both steps(1);
+}
+
+#d1:checked ~ #signal {
+  animation-duration: 4212ms;
+}
+
+#d2:checked ~ #signal {
+  animation-duration: 2755ms;
+}
+
+#d3:checked ~ #signal {
+  animation-duration: 1070ms;
+}
+
+#d4:checked ~ #signal {
+  animation-duration: 4114ms;
+}
+
+#d5:checked ~ #signal {
+  animation-duration: 4754ms;
+}
+
+#d6:checked ~ #signal {
+  animation-duration: 4361ms;
+}
+
+#d7:checked ~ #signal {
+  animation-duration: 3391ms;
+}
+
+#d8:checked ~ #signal {
+  animation-duration: 2672ms;
+}
+
+#d9:checked ~ #signal {
+  animation-duration: 3189ms;
+}
+
+#d10:checked ~ #signal {
+  animation-duration: 3167ms;
+}
+
+#d11:checked ~ #signal {
+  animation-duration: 2284ms;
+}
+
+#d12:checked ~ #signal {
+  animation-duration: 4295ms;
+}
+
+#d13:checked ~ #signal {
+  animation-duration: 1360ms;
+}
+
+#d14:checked ~ #signal {
+  animation-duration: 3066ms;
+}
+
+#d15:checked ~ #signal {
+  animation-duration: 4495ms;
+}
+
+#d16:checked ~ #signal {
+  animation-duration: 1696ms;
+}
+
+#d17:checked ~ #signal {
+  animation-duration: 3463ms;
+}
+
+#d18:checked ~ #signal {
+  animation-duration: 1516ms;
+}
+
+#d19:checked ~ #signal {
+  animation-duration: 1251ms;
+}
+
+#d20:checked ~ #signal {
+  animation-duration: 1771ms;
+}
+
+#d21:checked ~ #signal {
+  animation-duration: 3523ms;
+}
+
+#d22:checked ~ #signal {
+  animation-duration: 1605ms;
+}
+
+#d23:checked ~ #signal {
+  animation-duration: 1060ms;
+}
+
+#d24:checked ~ #signal {
+  animation-duration: 1326ms;
+}
+
+#d25:checked ~ #signal {
+  animation-duration: 1222ms;
+}
+
+#d26:checked ~ #signal {
+  animation-duration: 1738ms;
+}
+
+#d27:checked ~ #signal {
+  animation-duration: 1964ms;
+}
+
+#d28:checked ~ #signal {
+  animation-duration: 3976ms;
+}
+
+#d29:checked ~ #signal {
+  animation-duration: 4272ms;
+}
+
+#d30:checked ~ #signal {
+  animation-duration: 4037ms;
+}
+
+#d31:checked ~ #signal {
+  animation-duration: 1808ms;
+}
+
+#d32:checked ~ #signal {
+  animation-duration: 4947ms;
+}
+
+#d33:checked ~ #signal {
+  animation-duration: 3084ms;
+}
+
+#d34:checked ~ #signal {
+  animation-duration: 1579ms;
+}
+
+#d35:checked ~ #signal {
+  animation-duration: 2680ms;
+}
+
+#d36:checked ~ #signal {
+  animation-duration: 2936ms;
+}
+
+#d37:checked ~ #signal {
+  animation-duration: 3634ms;
+}
+
+#d38:checked ~ #signal {
+  animation-duration: 1060ms;
+}
+
+#d39:checked ~ #signal {
+  animation-duration: 1073ms;
+}
+
+#d40:checked ~ #signal {
+  animation-duration: 2529ms;
+}
+
+#d41:checked ~ #signal {
+  animation-duration: 1011ms;
+}
+
+#d42:checked ~ #signal {
+  animation-duration: 3931ms;
+}
+
+#d43:checked ~ #signal {
+  animation-duration: 1078ms;
+}
+
+#d44:checked ~ #signal {
+  animation-duration: 3777ms;
+}
+
+#d45:checked ~ #signal {
+  animation-duration: 1711ms;
+}
+
+#d46:checked ~ #signal {
+  animation-duration: 3546ms;
+}
+
+#d47:checked ~ #signal {
+  animation-duration: 4129ms;
+}
+
+#d48:checked ~ #signal {
+  animation-duration: 3496ms;
+}
+
+#d49:checked ~ #signal {
+  animation-duration: 2620ms;
+}
+
+.start:checked ~ #results #lose {
+  animation: hide 3s both steps(1);
+}
+
+#d1:checked ~ #results #lose {
+  animation-duration: 4212ms;
+}
+
+#d2:checked ~ #results #lose {
+  animation-duration: 2755ms;
+}
+
+#d3:checked ~ #results #lose {
+  animation-duration: 1070ms;
+}
+
+#d4:checked ~ #results #lose {
+  animation-duration: 4114ms;
+}
+
+#d5:checked ~ #results #lose {
+  animation-duration: 4754ms;
+}
+
+#d6:checked ~ #results #lose {
+  animation-duration: 4361ms;
+}
+
+#d7:checked ~ #results #lose {
+  animation-duration: 3391ms;
+}
+
+#d8:checked ~ #results #lose {
+  animation-duration: 2672ms;
+}
+
+#d9:checked ~ #results #lose {
+  animation-duration: 3189ms;
+}
+
+#d10:checked ~ #results #lose {
+  animation-duration: 3167ms;
+}
+
+#d11:checked ~ #results #lose {
+  animation-duration: 2284ms;
+}
+
+#d12:checked ~ #results #lose {
+  animation-duration: 4295ms;
+}
+
+#d13:checked ~ #results #lose {
+  animation-duration: 1360ms;
+}
+
+#d14:checked ~ #results #lose {
+  animation-duration: 3066ms;
+}
+
+#d15:checked ~ #results #lose {
+  animation-duration: 4495ms;
+}
+
+#d16:checked ~ #results #lose {
+  animation-duration: 1696ms;
+}
+
+#d17:checked ~ #results #lose {
+  animation-duration: 3463ms;
+}
+
+#d18:checked ~ #results #lose {
+  animation-duration: 1516ms;
+}
+
+#d19:checked ~ #results #lose {
+  animation-duration: 1251ms;
+}
+
+#d20:checked ~ #results #lose {
+  animation-duration: 1771ms;
+}
+
+#d21:checked ~ #results #lose {
+  animation-duration: 3523ms;
+}
+
+#d22:checked ~ #results #lose {
+  animation-duration: 1605ms;
+}
+
+#d23:checked ~ #results #lose {
+  animation-duration: 1060ms;
+}
+
+#d24:checked ~ #results #lose {
+  animation-duration: 1326ms;
+}
+
+#d25:checked ~ #results #lose {
+  animation-duration: 1222ms;
+}
+
+#d26:checked ~ #results #lose {
+  animation-duration: 1738ms;
+}
+
+#d27:checked ~ #results #lose {
+  animation-duration: 1964ms;
+}
+
+#d28:checked ~ #results #lose {
+  animation-duration: 3976ms;
+}
+
+#d29:checked ~ #results #lose {
+  animation-duration: 4272ms;
+}
+
+#d30:checked ~ #results #lose {
+  animation-duration: 4037ms;
+}
+
+#d31:checked ~ #results #lose {
+  animation-duration: 1808ms;
+}
+
+#d32:checked ~ #results #lose {
+  animation-duration: 4947ms;
+}
+
+#d33:checked ~ #results #lose {
+  animation-duration: 3084ms;
+}
+
+#d34:checked ~ #results #lose {
+  animation-duration: 1579ms;
+}
+
+#d35:checked ~ #results #lose {
+  animation-duration: 2680ms;
+}
+
+#d36:checked ~ #results #lose {
+  animation-duration: 2936ms;
+}
+
+#d37:checked ~ #results #lose {
+  animation-duration: 3634ms;
+}
+
+#d38:checked ~ #results #lose {
+  animation-duration: 1060ms;
+}
+
+#d39:checked ~ #results #lose {
+  animation-duration: 1073ms;
+}
+
+#d40:checked ~ #results #lose {
+  animation-duration: 2529ms;
+}
+
+#d41:checked ~ #results #lose {
+  animation-duration: 1011ms;
+}
+
+#d42:checked ~ #results #lose {
+  animation-duration: 3931ms;
+}
+
+#d43:checked ~ #results #lose {
+  animation-duration: 1078ms;
+}
+
+#d44:checked ~ #results #lose {
+  animation-duration: 3777ms;
+}
+
+#d45:checked ~ #results #lose {
+  animation-duration: 1711ms;
+}
+
+#d46:checked ~ #results #lose {
+  animation-duration: 3546ms;
+}
+
+#d47:checked ~ #results #lose {
+  animation-duration: 4129ms;
+}
+
+#d48:checked ~ #results #lose {
+  animation-duration: 3496ms;
+}
+
+#d49:checked ~ #results #lose {
+  animation-duration: 2620ms;
+}
+
+#game:checked ~ #results #lose {
+  animation-play-state: paused;
+}
+
+#signal {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  cursor: pointer;
+}
+
+#game:checked ~ #signal {
+  display: none;
+}
+
+#results {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  appearance: none;
+  display: block;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+#win, #lose {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#win {
+  background: #2ecc71;
+}
+
+#lose {
+  background: #e74c3c;
+}
+
+#win .wrap {
+  vertical-align: baseline;
+}
+
+#counter {
+  font-size: 0;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+#counter::after {
+  content: 'ms';
+  display: inline-block;
+  vertical-align: bottom;
+  font-size: 3.2rem;
+  height: 1em;
+  line-height: 1em;
+  padding-left: 0.2em;
+  overflow: hidden;
+}
+
+#counter .digit {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  font-size: 3.2rem;
+  height: 1em;
+  line-height: 1em;
+  white-space: normal;
+}
+
+#counter .digit::before {
+  /* Size it */
+  content: '0';
+  color: rgba(0, 0, 0, 0);
+  visibility: hidden;
+}
+
+#counter .digit::after {
+  content: '0 \A 1 \A 2 \A 3 \A 4 \A 5 \A 6 \A 7 \A 8 \A 9';
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.start:checked ~ #results #counter .digit:after {
+  animation-name: counter;
+  animation-delay: 3s;
+  animation-timing-function: steps(10);
+  animation-iteration-count: infinite;
+}
+
+#d1:checked ~ #results #counter .digit:after {
+  animation-delay: 4212ms;
+}
+
+#d2:checked ~ #results #counter .digit:after {
+  animation-delay: 2755ms;
+}
+
+#d3:checked ~ #results #counter .digit:after {
+  animation-delay: 1070ms;
+}
+
+#d4:checked ~ #results #counter .digit:after {
+  animation-delay: 4114ms;
+}
+
+#d5:checked ~ #results #counter .digit:after {
+  animation-delay: 4754ms;
+}
+
+#d6:checked ~ #results #counter .digit:after {
+  animation-delay: 4361ms;
+}
+
+#d7:checked ~ #results #counter .digit:after {
+  animation-delay: 3391ms;
+}
+
+#d8:checked ~ #results #counter .digit:after {
+  animation-delay: 2672ms;
+}
+
+#d9:checked ~ #results #counter .digit:after {
+  animation-delay: 3189ms;
+}
+
+#d10:checked ~ #results #counter .digit:after {
+  animation-delay: 3167ms;
+}
+
+#d11:checked ~ #results #counter .digit:after {
+  animation-delay: 2284ms;
+}
+
+#d12:checked ~ #results #counter .digit:after {
+  animation-delay: 4295ms;
+}
+
+#d13:checked ~ #results #counter .digit:after {
+  animation-delay: 1360ms;
+}
+
+#d14:checked ~ #results #counter .digit:after {
+  animation-delay: 3066ms;
+}
+
+#d15:checked ~ #results #counter .digit:after {
+  animation-delay: 4495ms;
+}
+
+#d16:checked ~ #results #counter .digit:after {
+  animation-delay: 1696ms;
+}
+
+#d17:checked ~ #results #counter .digit:after {
+  animation-delay: 3463ms;
+}
+
+#d18:checked ~ #results #counter .digit:after {
+  animation-delay: 1516ms;
+}
+
+#d19:checked ~ #results #counter .digit:after {
+  animation-delay: 1251ms;
+}
+
+#d20:checked ~ #results #counter .digit:after {
+  animation-delay: 1771ms;
+}
+
+#d21:checked ~ #results #counter .digit:after {
+  animation-delay: 3523ms;
+}
+
+#d22:checked ~ #results #counter .digit:after {
+  animation-delay: 1605ms;
+}
+
+#d23:checked ~ #results #counter .digit:after {
+  animation-delay: 1060ms;
+}
+
+#d24:checked ~ #results #counter .digit:after {
+  animation-delay: 1326ms;
+}
+
+#d25:checked ~ #results #counter .digit:after {
+  animation-delay: 1222ms;
+}
+
+#d26:checked ~ #results #counter .digit:after {
+  animation-delay: 1738ms;
+}
+
+#d27:checked ~ #results #counter .digit:after {
+  animation-delay: 1964ms;
+}
+
+#d28:checked ~ #results #counter .digit:after {
+  animation-delay: 3976ms;
+}
+
+#d29:checked ~ #results #counter .digit:after {
+  animation-delay: 4272ms;
+}
+
+#d30:checked ~ #results #counter .digit:after {
+  animation-delay: 4037ms;
+}
+
+#d31:checked ~ #results #counter .digit:after {
+  animation-delay: 1808ms;
+}
+
+#d32:checked ~ #results #counter .digit:after {
+  animation-delay: 4947ms;
+}
+
+#d33:checked ~ #results #counter .digit:after {
+  animation-delay: 3084ms;
+}
+
+#d34:checked ~ #results #counter .digit:after {
+  animation-delay: 1579ms;
+}
+
+#d35:checked ~ #results #counter .digit:after {
+  animation-delay: 2680ms;
+}
+
+#d36:checked ~ #results #counter .digit:after {
+  animation-delay: 2936ms;
+}
+
+#d37:checked ~ #results #counter .digit:after {
+  animation-delay: 3634ms;
+}
+
+#d38:checked ~ #results #counter .digit:after {
+  animation-delay: 1060ms;
+}
+
+#d39:checked ~ #results #counter .digit:after {
+  animation-delay: 1073ms;
+}
+
+#d40:checked ~ #results #counter .digit:after {
+  animation-delay: 2529ms;
+}
+
+#d41:checked ~ #results #counter .digit:after {
+  animation-delay: 1011ms;
+}
+
+#d42:checked ~ #results #counter .digit:after {
+  animation-delay: 3931ms;
+}
+
+#d43:checked ~ #results #counter .digit:after {
+  animation-delay: 1078ms;
+}
+
+#d44:checked ~ #results #counter .digit:after {
+  animation-delay: 3777ms;
+}
+
+#d45:checked ~ #results #counter .digit:after {
+  animation-delay: 1711ms;
+}
+
+#d46:checked ~ #results #counter .digit:after {
+  animation-delay: 3546ms;
+}
+
+#d47:checked ~ #results #counter .digit:after {
+  animation-delay: 4129ms;
+}
+
+#d48:checked ~ #results #counter .digit:after {
+  animation-delay: 3496ms;
+}
+
+#d49:checked ~ #results #counter .digit:after {
+  animation-delay: 2620ms;
+}
+
+#counter .digit:nth-child(1)::after {
+  animation-duration: 1000s;
+}
+
+#counter .digit:nth-child(2)::after {
+  animation-duration: 100s;
+}
+
+#counter .digit:nth-child(3)::after {
+  animation-duration: 10s;
+}
+
+#counter .digit:nth-child(4)::after {
+  animation-duration: 1s;
+}
+
+#counter .digit:nth-child(5)::after {
+  animation-duration: .1s;
+}
+
+#counter .digit:nth-child(6)::after {
+  animation-duration: .01s;
+}
+
+#game:checked ~ #results #counter .digit:after {
+  animation-play-state: paused;
+}
+</style>
+</head>
+<body>
+<form>
+  <input class='start' id='d1' type='checkbox'>
+  <input class='start' id='d2' type='checkbox'>
+  <input class='start' id='d3' type='checkbox'>
+  <input class='start' id='d4' type='checkbox'>
+  <input class='start' id='d5' type='checkbox'>
+  <input class='start' id='d6' type='checkbox'>
+  <input class='start' id='d7' type='checkbox'>
+  <input class='start' id='d8' type='checkbox'>
+  <input class='start' id='d9' type='checkbox'>
+  <input class='start' id='d10' type='checkbox'>
+  <input class='start' id='d11' type='checkbox'>
+  <input class='start' id='d12' type='checkbox'>
+  <input class='start' id='d13' type='checkbox'>
+  <input class='start' id='d14' type='checkbox'>
+  <input class='start' id='d15' type='checkbox'>
+  <input class='start' id='d16' type='checkbox'>
+  <input class='start' id='d17' type='checkbox'>
+  <input class='start' id='d18' type='checkbox'>
+  <input class='start' id='d19' type='checkbox'>
+  <input class='start' id='d20' type='checkbox'>
+  <input class='start' id='d21' type='checkbox'>
+  <input class='start' id='d22' type='checkbox'>
+  <input class='start' id='d23' type='checkbox'>
+  <input class='start' id='d24' type='checkbox'>
+  <input class='start' id='d25' type='checkbox'>
+  <input class='start' id='d26' type='checkbox'>
+  <input class='start' id='d27' type='checkbox'>
+  <input class='start' id='d28' type='checkbox'>
+  <input class='start' id='d29' type='checkbox'>
+  <input class='start' id='d30' type='checkbox'>
+  <input class='start' id='d31' type='checkbox'>
+  <input class='start' id='d32' type='checkbox'>
+  <input class='start' id='d33' type='checkbox'>
+  <input class='start' id='d34' type='checkbox'>
+  <input class='start' id='d35' type='checkbox'>
+  <input class='start' id='d36' type='checkbox'>
+  <input class='start' id='d37' type='checkbox'>
+  <input class='start' id='d38' type='checkbox'>
+  <input class='start' id='d39' type='checkbox'>
+  <input class='start' id='d40' type='checkbox'>
+  <input class='start' id='d41' type='checkbox'>
+  <input class='start' id='d42' type='checkbox'>
+  <input class='start' id='d43' type='checkbox'>
+  <input class='start' id='d44' type='checkbox'>
+  <input class='start' id='d45' type='checkbox'>
+  <input class='start' id='d46' type='checkbox'>
+  <input class='start' id='d47' type='checkbox'>
+  <input class='start' id='d48' type='checkbox'>
+  <input class='start' id='d49' type='checkbox'>
+  <input class='start' id='d50' type='checkbox'>
+  <input id='game' type='checkbox'>
+  <div id='intro'>
+    <label for='d1'></label>
+    <label for='d2'></label>
+    <label for='d3'></label>
+    <label for='d4'></label>
+    <label for='d5'></label>
+    <label for='d6'></label>
+    <label for='d7'></label>
+    <label for='d8'></label>
+    <label for='d9'></label>
+    <label for='d10'></label>
+    <label for='d11'></label>
+    <label for='d12'></label>
+    <label for='d13'></label>
+    <label for='d14'></label>
+    <label for='d15'></label>
+    <label for='d16'></label>
+    <label for='d17'></label>
+    <label for='d18'></label>
+    <label for='d19'></label>
+    <label for='d20'></label>
+    <label for='d21'></label>
+    <label for='d22'></label>
+    <label for='d23'></label>
+    <label for='d24'></label>
+    <label for='d25'></label>
+    <label for='d26'></label>
+    <label for='d27'></label>
+    <label for='d28'></label>
+    <label for='d29'></label>
+    <label for='d30'></label>
+    <label for='d31'></label>
+    <label for='d32'></label>
+    <label for='d33'></label>
+    <label for='d34'></label>
+    <label for='d35'></label>
+    <label for='d36'></label>
+    <label for='d37'></label>
+    <label for='d38'></label>
+    <label for='d39'></label>
+    <label for='d40'></label>
+    <label for='d41'></label>
+    <label for='d42'></label>
+    <label for='d43'></label>
+    <label for='d44'></label>
+    <label for='d45'></label>
+    <label for='d46'></label>
+    <label for='d47'></label>
+    <label for='d48'></label>
+    <label for='d49'></label>
+    <label for='d50'></label>
+    <div>Click to start<br>Then click again as soon as the box turns green</div>
+  </div>
+  <label for='game' id='signal'></label>
+  <button id='results' type='reset'>
+    <div id='win'>
+      <div>
+        <span id='counter'>
+          <div class='digit'></div>
+          <div class='digit'></div>
+          <div class='digit'></div>
+          <div class='digit'></div>
+          <div class='digit'></div>
+          <div class='digit'></div>
+        </span>
+        <br>Click to try again
+      </div>
+    </div>
+    <div id='lose'>
+      <div>TOO SOON !<br>Click to try again</div>
+    </div>
+  </button>
+</form>
+<script>
+// No JS
+</script>
+</body>
+</html>

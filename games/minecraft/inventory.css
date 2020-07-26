@@ -1,0 +1,32 @@
+.invItemContainer {
+  display: block;
+  position: relative;
+  /*pointer-events: none;*/
+}
+
+.invItemIcon {
+  display: inline-block;
+  position: absolute;
+  
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.invItemBadge {
+  display: inline-block;
+  position: absolute;
+  
+  font-family: sans-serif;
+  font-weight: bold;
+  color: white;
+}
+
+.invItemBar {
+  display: inline-block;
+  position: absolute;
+  
+  height: 5px;
+  
+  background-color: #3f3;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">-->
+  
+  <script src="lib/three.js"></script>
+  <script src="lib/PointerLockControls.js"></script>
+  <script src="lib/perlin.js"></script>
+  
+  <script src="inventory.js"></script>
+  <script src="util.js"></script>
+  <script src="init.js"></script>
+  <script src="webgl-init.js"></script>
+  <script src="input.js"></script>
+  <script src="main.js"></script>
+  <script src="mapdata.js"></script>
+  <script src="itemdata.js"></script>
+  <script src="mapmesh.js"></script>
+  <script src="textures.js"></script>
+  <script src="raycast.js"></script>
+  <script src="mapinteract.js"></script>
+  <script src="collision.js"></script>
+  <script src="maplight.js"></script>
+  <script src="hud.js"></script>
+  <script src="mods.js"></script>
+  <script src="gui.js"></script>
+  <script src="mapmeta.js"></script>
+  <script src="mapgen/main.js"></script>
+  <script src="mapgen/tree.js"></script>
+  <script src="mapgen/ore.js"></script>
+  
+  <script src="mods/crafting.js"></script>
+  <script src="mods/creative-inventory.js"></script>
+  <script src="mods/furnace.js"></script>
+  <script src="mods/ores.js"></script>
+  <script src="mods/chat.js"></script>
+  <!--<script src="mods/entity.js"></script>-->
+  
+  <link rel="stylesheet" type="text/css" href="hud.css">
+  <link rel="stylesheet" type="text/css" href="inventory.css">
+  <link rel="stylesheet" type="text/css" href="gui.css">
+  
+  <style>
+  body {
+    margin: 0px;
+    overflow: hidden;
+    font-size: 0;
+    user-select: none;
+  }
+  #tint {
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: none;
+    pointer-events: none;
+  }
+  #crosshair {
+    z-index: 2;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    
+    color: white;
+    font-family: sans-serif;
+    font-size: 40px;
+    font-weight: 100;
+  }
+  </style>
+</head>
+<body>
+<div id="tint"></div>
+<div id="crosshair">+</div>
+<div id="hud"></div>
+<div id="popup"></div>
+</body>
+</html>

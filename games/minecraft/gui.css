@@ -1,0 +1,54 @@
+#popup {
+  z-index: 2;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  
+  display: none;
+}
+
+#guiHand {
+  z-index: 5;
+  position: fixed;
+  pointer-events: none;
+}
+
+.guiDialog {
+  /*position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);*/
+  display: inline-block;
+  position: relative;
+  /*margin: auto;*/
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
+  text-align: left;
+  
+  background-color: #c6c6c6;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.guiBlockGridContainer {
+  display: block;
+  font-size: 0;
+}
+
+.guiBlockCell {
+  display: inline-block;
+  margin: 5px;
+  border: 2px solid #333;
+  
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.guiPixelArt {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}

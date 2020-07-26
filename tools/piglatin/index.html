@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="./css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./css/styles.css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="js/jquery-1.12.0.js"></script>
+    <script src="js/scripts.js"></script>
+	<style>
+	.bottommiddle{position:absolute;left:50%;bottom:10%;transform:translate(-50%,10%);-ms-transform:translate(-50%,10%)}
+	body {text-align: center;}input::placeholder {text-align: center;}
+	</style>
+  </head>
+  <div class="container">
+  <h1></h1>
+</div>
+  <body >
+  <a style="position: fixed; top: 2%; left: 2%;font-weight: 40px; font-size: 200%;color: black;text-decoration: none;" onMouseover="showtext(this)" onMouseout="hidetext()" title="Back" href="javascript:history.back()" >&#128281; Back</a>
+    <h2>Pig Latin Translator</h2>
+<div class="w3-display-middle">
+ <form class="piggyForm">
+  <div class="form-group">
+
+    <input type="text" required class="form-control" id="inputForm" style="width:500px;" placeholder="utpay ouryay ordsway erehay">
+  </div>
+  <button type="submit" class="btn btn-default" id="inputbtn">Translate!</button>
+ </form>
+
+
+</div>
+ <div class="bottommiddle" style="background: rgba(152,249,88,0.5);padding: 3px 5px; margin: -3px -5px; line-height: 1.7; border-radius: 3px;" class="translation-box">
+   <h4><span class="translation"></span></h4>
+ </div>
+  </body>
+</html>

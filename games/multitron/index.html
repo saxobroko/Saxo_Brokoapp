@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Multiplayer Tron</title>
+  <style>
+    #body_{
+        background-color: #512E5F;
+		overflow:hidden;
+    }
+    canvas {
+    		display: block;
+    		position: absolute;
+    		border: 1px solid #000;
+    		margin: auto;
+    		top: 0;
+    		bottom: 0;
+    		right: 0;
+    		left: 0;
+    	}
+  </style>
+</head>
+
+<body id="body_">
+    <div style="background-color:#fff">
+        <br>
+        <h3>1st Player(PURPLE)<br> left=A,right=D<br>up=W,down=S</h3>
+        <h3>2nd Player(RED)<br> left=J,right=L<br>up=I,down=K</h3>
+        <h3>3rd Player(BLUE)<br> left=arrow-Left,right=arrow-Right<br>up=arrow-Up,down=arrow-Down</h3>
+    </div>
+    <div style="background-color:#21fe41">
+        <h3></h3>
+        <br>
+        <h3>__PRESS F5 key to Replay__</h3>
+        <br>
+        <h3></h3>
+    </div>
+    <div style="background-color:#fff">
+        <h3><br><br> <br></h3>
+       <h3><br><br> <br></h3>
+       <h3><br><br></h3>
+    </div>
+  <script>
+    var
+    COLS = 50,
+    ROWS = 50,
+    EMPTY = 0,
+    BIKE = 1,
+    BIKE_ = 3,
+    BIKE_O = 4,
+    LEFT  = 0,
+    UP    = 1,
+    RIGHT = 2,
+    DOWN  = 3,
+	LEFT_  = 4,
+	UP_    = 5,
+	RIGHT_ = 6,
+	DOWN_  = 7,
+    LEFT_O  = 8,
+    UP_O    = 9,
+    RIGHT_O = 10,
+    DOWN_O  = 11,
+    KEY_LEFT  = 37,
+    KEY_UP    = 38,
+    KEY_RIGHT = 39,
+    KEY_DOWN  = 40,
+	KEY_LEFT_  = 74,
+    KEY_UP_    = 73,
+    KEY_RIGHT_ = 76,
+    KEY_DOWN_  = 75,
+    KEY_LEFT_O  = 65,
+    KEY_UP_O    = 87,
+    KEY_RIGHT_O = 68,
+    KEY_DOWN_O  = 83,
+    COUNT=0,
+    C=1,
+    C_=1,
+    C_O=1,
+    SN=1,
+    SN_=3,
+    SN_O=4,
+    canvas,	  
+    ctx,	  
+    keystate, 
+    frames,   
+    score;	  
+    grid = {
+    	width: null,  
+    	height: null, 
+    	_grid: null, 
+    	init: function(d, c, r) {
+    		this.width = c;
+    		this.height = r;
+    		this._grid = [];
+    		for (var x=0; x < c; x++) {
+    			this._grid.push([]);
+    			for (var y=0; y < r; y++) {
+    				this._grid[x].push(d);
+    			}
+    		}
+    	},
+    	set: function(val, x, y) {
+    		this._grid[x][y] = val;
+    	},
+    	get: function(x, y) {
+    		return this._grid[x][y];
+    	}
+    }
+    bike = {
+    	direction: null, 
+    	last: null,		 	
+    	_queue: null,	
+    	init: function(d, x, y) {
+    		this.direction = d;
+    		this._queue = [];
+    		this.insert(x, y);
+    	},
+    	insert: function(x, y) {
+    		this._queue.unshift({x:x, y:y});
+    		this.last = this._queue[0];
+    	},
+    };
+    bike_ = {
+    	direction_: null, 
+    	last_: null,		
+    	_queue_: null,	 
+    	init_: function(d, x, y) {
+    		this.direction_ = d;
+    		this._queue_ = [];
+    		this.insert_(x, y);
+    	},
+    	insert_: function(x, y) {
+    		this._queue_.unshift({x:x, y:y});
+    		this.last_ = this._queue_[0];
+    	},
+    };
+    bike_O = {
+        direction_O: null, 
+        last_O: null,        
+        _queue_O: null,  
+        init_O: function(d, x, y) {
+            this.direction_O = d;
+            this._queue_O = [];
+            this.insert_O(x, y);
+        },
+        insert_O: function(x, y) {
+            this._queue_O.unshift({x:x, y:y});
+            this.last_O = this._queue_O[0];
+        },
+    };
+    function main() {
+    	canvas = document.createElement("canvas");
+    	canvas.width = COLS*12;
+    	canvas.height = ROWS*12;
+    	ctx = canvas.getContext("2d");
+    	document.body.appendChild(canvas);
+    	ctx.font = "12px Helvetica";
+    	frames = 0;
+    	keystate = {};
+    	document.addEventListener("keydown", function(evt) {
+    		keystate[evt.keyCode] = true;
+    	});
+    	document.addEventListener("keyup", function(evt) {
+    		delete keystate[evt.keyCode];
+    	});
+    	init();
+    	loop();
+    }
+    function init() {
+        COUNT=0;
+        C=1;
+        C_=1;
+        C_O=1;
+        SN=1,
+        SN_=3,
+        SN_O=4,
+    	score = 0;
+    	grid.init(EMPTY, COLS, ROWS);
+    	var sp = {x:Math.floor(COLS*2/3), y:ROWS/2};
+    	bike.init(UP, sp.x, sp.y);
+    	grid.set(BIKE, sp.x, sp.y);
+    	var sq = {x:Math.floor(COLS/2), y:ROWS/2};
+    	bike_.init_(DOWN_, sq.x, sq.y);
+    	grid.set(BIKE_, sq.x, sq.y);
+        var sx = {x:Math.floor(COLS/3), y:ROWS/2};
+        bike_O.init_O(UP_O, sx.x, sx.y);
+        grid.set(BIKE_O, sx.x, sx.y);
+    }
+    function loop() {
+    	update();
+    	draw();
+    	window.requestAnimationFrame(loop, canvas);
+    }
+    function update() {
+    	frames++;
+    	if (keystate[KEY_LEFT] && bike.direction !== RIGHT) {
+    		bike.direction = LEFT;
+    	}
+    	if (keystate[KEY_UP] && bike.direction !== DOWN) {
+    		bike.direction = UP;
+    	}
+    	if (keystate[KEY_RIGHT] && bike.direction !== LEFT) {
+    		bike.direction = RIGHT;
+    	}
+    	if (keystate[KEY_DOWN] && bike.direction !== UP) {
+    		bike.direction = DOWN;
+    	}
+    	if (keystate[KEY_LEFT_] && bike_.direction_ !== RIGHT_) {
+    		bike_.direction_ = LEFT_;
+    	}
+    	if (keystate[KEY_UP_] && bike_.direction_ !== DOWN_) {
+    		bike_.direction_ = UP_;
+    	}
+    	if (keystate[KEY_RIGHT_] && bike_.direction_ !== LEFT_) {
+    		bike_.direction_ = RIGHT_;
+    	}
+    	if (keystate[KEY_DOWN_] && bike_.direction_ !== UP_) {
+    		bike_.direction_ = DOWN_;
+    	}
+        if (keystate[KEY_LEFT_O] && bike_O.direction_O !== RIGHT_O) {
+            bike_O.direction_O = LEFT_O;
+        }
+        if (keystate[KEY_UP_O] && bike_O.direction_O !== DOWN_O) {
+            bike_O.direction_O = UP_O;
+        }
+        if (keystate[KEY_RIGHT_O] && bike_O.direction_O !== LEFT_O) {
+            bike_O.direction_O = RIGHT_O;
+        }
+        if (keystate[KEY_DOWN_O] && bike_O.direction_O !== UP_O) {
+            bike_O.direction_O = DOWN_O;
+        }
+    	if (frames%4 === 0) {
+    		var nx = bike.last.x;
+    		var ny = bike.last.y;
+
+    		var qx = bike_.last_.x;
+    		var qy = bike_.last_.y;
+
+            var ox = bike_O.last_O.x;
+            var oy = bike_O.last_O.y;
+    		switch (bike.direction) {
+    			case LEFT:
+    				nx--;
+    				break;
+    			case UP:
+    				ny--;
+    				break;
+    			case RIGHT:
+    				nx++;
+    				break;
+    			case DOWN:
+    				ny++;
+    				break;
+    		}
+    		switch (bike_.direction_) {
+    			case LEFT_:
+    				qx--;
+    				break;
+    			case UP_:
+    				qy--;
+    				break;
+    			case RIGHT_:
+    				qx++;
+    				break;
+    			case DOWN_:
+    				qy++;
+    				break;
+    		}
+            switch (bike_O.direction_O) {
+                case LEFT_O:
+                    ox--;
+                    break;
+                case UP_O:
+                    oy--;
+                    break;
+                case RIGHT_O:
+                    ox++;
+                    break;
+                case DOWN_O:
+                    oy++;
+                    break;
+            }
+    		if ((0 > nx || nx > grid.height-1  ||
+    			0 > ny || ny > grid.width-1 ||
+    			grid.get(nx, ny) === BIKE||
+    			grid.get(nx, ny) === BIKE_||
+                grid.get(nx, ny) === BIKE_O) &&C==1
+    		) {
+                
+                for(var i=0;i<=grid.height-1;i++)
+                    {
+                        for(var j=0;j<=grid.width-1;j++)
+                        {
+                            if (grid.get(i, j) === BIKE)
+                            {
+                                grid.set(EMPTY,i,j); 
+                            }
+                        }
+                    }
+                    SN=0;
+                C=0;
+                    COUNT++;
+    		}
+    		if ((0 > qx || qx > grid.height-1  ||
+    			0 > qy || qy > grid.width-1 ||
+    			grid.get(qx, qy) === BIKE||
+    			grid.get(qx, qy) === BIKE_||
+                grid.get(qx, qy) === BIKE_O)&& C_==1
+    		) {
+                
+                for(var i=0;i<=grid.height-1;i++)
+                    {
+                        for(var j=0;j<=grid.width-1;j++)
+                        {
+                            if (grid.get(i, j) === BIKE_)
+                            {
+                                grid.set(EMPTY,i,j); 
+                            }
+                        }
+                    }
+                    SN_=0;
+                C_=0;
+                    COUNT++;
+    		}
+            if ((0 > ox || ox > grid.height-1  ||
+                0 > oy || oy > grid.width-1 ||
+                grid.get(ox, oy) === BIKE||
+                grid.get(ox, oy) === BIKE_||
+                grid.get(ox, oy) === BIKE_O)&& C_O==1
+            ) {
+                
+                for(var i=0;i<=grid.height-1;i++)
+                    {
+                        for(var j=0;j<=grid.width-1;j++)
+                        {
+                            if (grid.get(i, j) === BIKE_O)
+                            {
+                                grid.set(EMPTY,i,j); 
+                            }
+                        }
+                    }
+                    SN_O=0;
+                C_O=0;
+                    COUNT++;
+            }
+
+    		if(SN==1)
+            {
+              grid.set(BIKE, nx, ny);
+    		  bike.insert(nx, ny);
+            }
+    		if(SN_==3)
+            {
+                grid.set(BIKE_, qx, qy);
+    		  bike_.insert_(qx, qy);
+            }
+            if(SN_O==4)
+            {
+                grid.set(BIKE_O, ox, oy);
+            
+              bike_O.insert_O(ox, oy);
+            }
+            if(COUNT==2 && SN==1)
+                {
+                    alert("BLUE Wins >>> Ha ah aha aaaaa");
+                    COUNT=0;       
+                }
+            if(COUNT==2 && SN_==3)
+                {
+                    alert("RED Wins  >>> He ehe ehe eheeee");
+                    COUNT=0;
+                }
+            if(COUNT==2 && SN_O==4)
+                {
+                    alert("PURPLE Wins  >>>  UHa ha Ua Uhaaaaa");
+                    COUNT=0;
+                }
+    	}
+    }
+    function draw() {
+    	var tw = canvas.width/grid.width;
+    	var th = canvas.height/grid.height;
+    	for (var x=0; x < grid.width; x++) {
+    		for (var y=0; y < grid.height; y++) {
+    			switch (grid.get(x, y)) {
+    				case EMPTY:
+    					ctx.fillStyle = "#fff";
+    					break;
+    				case BIKE:
+    					ctx.fillStyle = "#00f";//blue 1
+    					break;
+    				case BIKE_:
+    					ctx.fillStyle = "#f00";// red 2
+    					break;
+    				case BIKE_O:
+    					ctx.fillStyle = "#f0f";// purple 3
+    					break;
+    			}
+    			ctx.fillRect(x*tw, y*th, tw, th);
+    		}
+    	}
+    }
+    main();
+  </script>
+</body>
+
+</html>

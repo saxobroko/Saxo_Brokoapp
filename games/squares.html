@@ -1,0 +1,117 @@
+ <html>
+<head>
+    <title>
+        Squares
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyDtt-9S2GOb1FjHUL8UiAm2d6QqDbcCwOU",
+        authDomain: "montana-265c0.firebaseapp.com",
+        databaseURL: "https://montana-265c0.firebaseio.com",
+        storageBucket: "montana-265c0.appspot.com",
+        messagingSenderId: "535748054155"
+      };
+      firebase.initializeApp(config);
+    </script>
+</head>
+<body id="mainBody" style="width:100%;height:100%; padding:0px; margin:0px">
+</body>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //get a name for the player
+        var person = prompt("Please enter your name", "Harry Potter");
+
+        //Get a user ID
+        //how to ensure it's unique?
+        function randomString(length, chars) { 
+            var result = ''; 
+            for (var i = length; i > 0; --i) 
+                result += chars[Math.floor(Math.random() * chars.length)]; 
+            return result; } 
+        var userId = randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
+        //get a color for each user
+        //how to make unique?
+        //address issue of is rhe random number is less than 6 digits (eg: .5, .5672)
+        var color = '#'+Math.random().toString(16).substr(-6);
+
+        var size = 30;
+        var database = firebase.database();
+        var squareList = database.ref('/squares/');
+
+        function handleClick (ev) {
+            //Handle coordinates from scrolling; not robust for all browsers
+            var scrollTop = window.pageYOffset //|| docElem.scrollTop || body.scrollTop
+            // console.log('scrollTop: ' + scrollTop);
+            var scrollLeft = window.pageXOffset //|| docElem.scrollLeft || body.scrollLeft
+
+            //do math for the scrolling offset and to get the point at the center of the square
+            var top = (ev.clientY + scrollTop - (size/2));
+            var left = (ev.clientX + scrollLeft - (size/2));
+            
+            function writeNewSquare(left, top, color, userId, person) {
+                squareList.push({
+                    x: left,
+                    y: top,
+                    color: color,
+                    user: userId,
+                    name: person
+                });
+            };
+
+            //write to DB
+            writeNewSquare(left, top, color, userId, person);
+               
+        };
+
+        //define clickArea as BOM (Browser Object Model aka window)
+        var clickArea = window;
+        clickArea.addEventListener('click', handleClick);
+
+        //draw the square that was just added to the DB
+        squareList.on('child_added', function(snapshot) {
+
+            var square = $('<div id="' + snapshot.key +'" style="' +
+                           'position: absolute; ' +
+                           'width: '+ size + 'px; ' +
+                           'height: ' + size + 'px; ' +
+                           'background-color: ' + snapshot.val().color + '; ' +
+                           'top: ' + snapshot.val().y + 'px;' +
+                           'left: ' + snapshot.val().x + 'px;"' +
+                           '></div>');
+
+            //as long as the square doesn't already exist, draw it
+            if ($('#' + snapshot.key).length == 0) {
+                $('body').append(square);
+            };
+
+            //add a listener to check if the square belongs to an enemy
+            square.on('click', function(ev) {
+                if (snapshot.val().user != userId){
+                    // remove the square from the DB
+                    squareList.child(snapshot.key).remove();
+
+                    // prevent the parent .on() function from running needlessly
+                    ev.stopPropagation();
+                }
+            });
+
+        });
+
+        //remove squares from the DOM
+        squareList.on('child_removed', function(snapshot) {
+            $('#' + snapshot.key).remove();
+        })
+
+
+    });
+        
+    </script>
+
+</html>

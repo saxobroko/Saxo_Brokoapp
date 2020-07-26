@@ -1,0 +1,44 @@
+-Fix mouseover text (pointer events)
+-Quartz crafting
+-New textures!!!
+-Better inventory interaction
+  -Crafting - picking up when max stack exceeded
+  -Partial merges
+  -Picking up all of crafted or full stack in creative inventory
+-*Directional block placement
+  -Full directional placement
+-*More types of trees
+  -Biomes?
+  -All trees
+  -Better generation
+-Flowing water
+*-Crafting
+-Save/load mod
+-*Stairs mod
+-*Slab mod
+-*Mineral blocks
+-Fence mod
+-*Furnace mod
+-Signs mod
+-Glass panes, iron bars, etc.
+-Beds mod
+-*Farming mod
+  -*Seeds
+  -Fix selector highlight for farming meshes
+  -Sunlight req
+  -Water req
+-Minecart mod
+-Cake
+-Flint and steel
+-Armor mod
+-Flowers and dyes
+-*Fix multi-furnace support
+-E/n/t/i/t/i/e/s
+-Fix backwards UV mapping
+-Naturally occuring clay
+-Gravel and dirt deposits underground
+-Less blobby noise
+-Fix fluid/gravity
+-Fix slab icons
+-Selector that encompasses entire block? (hitboxes)
+-Finish redstone

@@ -1,0 +1,15 @@
+{
+  "name": "saxobroko",
+  "version": "2.0.0",
+  "description": "Official app for https://saxobroko.com",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "saxobrokoapp"
+  },
+  "author": "Saxo_Broko",
+  "license": "MIT"
+}

@@ -1,0 +1,130 @@
+.gameboxes {
+    border: 2px solid;
+    height: 300px;
+    width: 355px;
+    
+
+}
+
+.gametitle{
+    height: 125px;
+    padding-bottom:10px;
+}
+
+
+.jumbotron{
+    padding-top:5px;
+}
+
+.namesubmission{
+    margin-bottom:10px;
+    text-align: center;
+}
+
+.gameboxcontainer{
+    display:flex;
+    justify-content:space-around;
+    flex-wrap:nowrap;
+    
+}
+
+.playeronecenter{
+   
+}
+
+#waitingforplayerone{
+    
+}
+#playernameinput{}
+
+#adduser{}
+
+#playername{}
+
+#playernumber{}
+
+#turnstatus{}
+
+.playeronegamebox{}
+
+.playertwogamebox{}
+
+#playeronename{
+
+}
+#playertwoname{}
+
+#playeronerock{
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+#playeronerock:hover{
+    border: 1px solid black;
+    border-width: medium;
+}
+#playeronepaper{
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+#playeronepaper:hover{
+    border: 1px solid black;
+    border-width: medium;
+}
+#playeronescissors{
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+#playeronescissors:hover{
+    border: 1px solid black;
+    border-width: medium;
+}
+
+
+#playertworock{
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+#playertworock:hover{
+    border: 1px solid black;
+    border-width: medium;
+}
+#playertwopaper{
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+#playertwopaper:hover{
+    border: 1px solid black;
+    border-width: medium;
+}
+#playertwoscissors{
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+#playertwoscissors:hover{
+    border: 1px solid black;
+    border-width: medium;
+}
+
+
+.winloss{
+    position: relative;
+    
+}
+
+#playeronewincount{}
+#playeronelosscount{}
+#playertwowincount{}
+#playertwolosscount{}
+
+
+#middlemessage{}
+
+
+.chatbox{
+    margin-top:15px;
+    height: 165px;
+    overflow: auto;
+    margin-bottom: 5px;
+}
+
+.choicesrow{}
