@@ -1,2 +1,2 @@
 # Saxo_Brokoapp
-Native application for https://hub.saxobroko.ga
+Native application for https://saxobroko.com
