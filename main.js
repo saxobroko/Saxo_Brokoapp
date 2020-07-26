@@ -1,7 +1,29 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, screen, ipcMain} = require('electron')
-const path = require('path')
+const {app, BrowserWindow, screen, ipcMain, autoUpdater} = require('electron');
+const path = require('path');
 const { menu } = require("./menu");
+const server = 'https://update.electronjs.org'
+const feed = `${server}/OWNER/REPO/${process.platform}-${process.arch}/${app.getVersion()}`
+
+autoUpdater.setFeedURL(feed)
+require('update-electron-app')()
+setInterval(() => {
+  autoUpdater.checkForUpdates()
+}, 10 * 60 * 1000)
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+  }
+
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
+})
 
 let win
 const isWindows = process.platform === "win32";
