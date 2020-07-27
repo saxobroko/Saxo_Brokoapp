@@ -40,7 +40,6 @@ app.whenReady().then(() => {
   plugins: true,
   frame: false,
   backgroundColor: '#222',
-  show: false,
   webPreferences: {
       preload: path.join(__dirname, "preload.js"),
 	  enableRemoteModule: true
