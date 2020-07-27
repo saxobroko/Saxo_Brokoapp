@@ -11,7 +11,8 @@
     "build-win2": "electron-packager . SaxoBroko win 64 7.3.2 ",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=build/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . saxobroko --overwrite --asar=true --platform=win32 --arch=x64 --icon=build/icon.ico --prune=true --out=release-builds --version-string.CompanyName=2.0.0 --version-string.FileDescription=Official App --version-string.ProductName=\"Saxo_Broko App\"",
-    "package-linux": "electron-packager . saxobroko --overwrite --asar=true --platform=linux --arch=x64 --icon=build/icon.png --prune=true --out=release-builds"
+    "package-linux": "electron-packager . saxobroko --overwrite --asar=true --platform=linux --arch=x64 --icon=build/icon.png --prune=true --out=release-builds",
+	"create-installer-mac": "electron-installer-dmg ./release-builds/Electron\\ tutorial\\ app-darwin-x64/Electron\\ tutorial\\ app.app saxobroko --out=release-builds --overwrite"
   },
   "build": {
     "appId": "saxobroko",

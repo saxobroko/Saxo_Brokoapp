@@ -25,7 +25,6 @@ autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
   })
 })
 
-let win
 const isWindows = process.platform === "win32";
 app.whenReady().then(() => {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize
@@ -36,6 +35,8 @@ app.whenReady().then(() => {
   minheight: 800, 
   plugins: true,
   frame: false,
+  backgroundColor: '#222',
+  show: false,
   webPreferences: {
       preload: path.join(__dirname, "preload.js"),
 	  enableRemoteModule: true
@@ -50,6 +51,9 @@ app.whenReady().then(() => {
   win.maximize();
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
+		win.once('ready-to-show', () => {
+			win.show()
+		})
   })
 })
 
