@@ -12,7 +12,8 @@
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=build/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . saxobroko --overwrite --asar=true --platform=win32 --arch=x64 --icon=../../../build/icon.ico --prune=true --out=release-builds --version-string.CompanyName=2.0.1 --version-string.FileDescription=Official App --version-string.ProductName=\"Saxo_Broko App\"",
     "package-linux": "electron-packager . saxobroko --overwrite --asar=true --platform=linux --arch=x64 --icon=build/icon.png --prune=true --out=release-builds",
-    "create-installer-mac": "electron-installer-dmg ./release-builds/Electron\\ tutorial\\ app-darwin-x64/Electron\\ tutorial\\ app.app saxobroko --out=release-builds --overwrite"
+    "create-installer-mac": "electron-installer-dmg ./release-builds/Electron\\ tutorial\\ app-darwin-x64/Electron\\ tutorial\\ app.app saxobroko --out=release-builds --overwrite",
+	"tauri": "tauri"
   },
   "build": {
     "appId": "saxobroko",
@@ -51,6 +52,7 @@
   "dependencies": {
     "@electron-forge/maker-wix": "^6.0.0-beta.52",
     "electron-updater": "^4.3.1",
+    "tauri": "^0.11.1",
     "update-electron-app": "^1.5.0"
   },
   "devDependencies": {
