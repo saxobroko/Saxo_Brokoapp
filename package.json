@@ -56,7 +56,7 @@
     "update-electron-app": "^1.5.0"
   },
   "devDependencies": {
-    "electron": "^9.4",
+    "electron": "^13.6",
     "electron-builder": "^22.7.0",
     "electron-packager": "^15.0.0",
     "electron-winstaller": "^4.0.1"
